@@ -7,7 +7,11 @@ async function registrate(ip, data) {
       },
       body: JSON.stringify(data)
     });
-    return request.ok;
+    console.log('REGISTRATE', request.ok, request.id);
+    return {
+      ok: request.ok,
+      id: request.id,
+    }
   } catch (err) {
     console.log(err);
   }

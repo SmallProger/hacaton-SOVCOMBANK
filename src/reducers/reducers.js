@@ -1,5 +1,6 @@
 let initialState = {
   isAdminAuth: false,
+  id: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const reducer = (state = initialState, action) => {
       return ({
         ...state,
         isAdminAuth: action.payload,
+      })
+    case 'SET_ID':
+      return ({
+        ...state,
+        id: action.payload,
       })
     default:
       return state;

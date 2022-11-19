@@ -7,7 +7,12 @@ async function authenticate(ip, data, api) {
       },
       body: JSON.stringify(data)
     })
-    return request.ok;
+    console.log('authenticate', request.ok, request.id);
+    return {
+      ok: request.ok,
+      id: request.id,
+    }
+
   } catch (err) {
     console.log(err);
   }

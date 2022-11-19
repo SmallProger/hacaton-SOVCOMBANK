@@ -4,11 +4,11 @@ import './RegistrationPage.css';
 import { CustomField } from '../../common/common';
 import { SIGNUP_SCHEMA, LABEL_PLACEHOLDERS, INITIAL_VALUES, MASKS } from './constants'
 import { useNavigate } from 'react-router-dom';
-import { setIsAdminAuth } from '../../actions/actions';
+import { setAccountId, setIsAdminAuth } from '../../actions/actions';
 import { registrate } from '../../services/registrate';
 import { IP_ADDRESS } from '../../App/App';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 
 // Для добавления новых полей, нужно перейти в файл constants.js и ввести соотвественно изменения в:
 // SIGNUP_SCHEMA, LABEL_PLACEHOLDERS, INITIAL_VALUES, MASKS
@@ -54,8 +54,10 @@ function RegistrationPage() {
       lastName,
       gender
     }
-    let ok = await registrate(IP, data)
+    let { ok, id } = await registrate(IP, data)
     if (ok) {
+      //Недостающая логика
+      setAccountId(id);
       alert('успешно');
     }
   }
@@ -97,7 +99,7 @@ function RegistrationPage() {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setIsAdminAuth }, dispatch)
+  return bindActionCreators({ setIsAdminAuth, setAccountId }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(RegistrationPage);

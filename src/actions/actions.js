@@ -5,5 +5,10 @@ const setIsAdminAuth = (isAdminAuth) => {
     type: 'IS_ADMIN_AUTH',
   }
 }
-
-export { setIsAdminAuth }
+const setAccountId = (id) => {
+  return {
+    payload: id,
+    type: 'SET_ID',
+  }
+}
+export { setIsAdminAuth, setAccountId }
