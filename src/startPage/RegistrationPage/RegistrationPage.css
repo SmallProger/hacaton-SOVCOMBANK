@@ -1,0 +1,46 @@
+.reg-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+
+  border: 1px solid black;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 300px;
+}
+.form__elem {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+.form__error {
+  position: absolute;
+  top: 100%;
+  left: 15%;
+
+  color: #ff0000;
+}
+.form__btn {
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+}
+.form__link-admin {
+  text-decoration: underline;
+  cursor: pointer;
+}
