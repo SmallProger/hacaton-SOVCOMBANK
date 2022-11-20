@@ -5,7 +5,6 @@ import './Navigation.css'
 function Link({ route, placeholder, id, setSelectedItemId, selectedItemId }) {
   let navigate = useNavigate();
   let className = 'nav__item' + (id === selectedItemId ? ' nav__item_selected' : '');
-  console.log(className, selectedItemId, id)
   function handleClick(route) {
     return () => {
       setSelectedItemId(id);

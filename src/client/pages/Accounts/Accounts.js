@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinearGraphic } from '../../LinearGraphic/LinearGraphic';
 import './Accounts.css';
-
+import { connect } from 'react-redux';
 import { FormOrder } from '../../FormOrder/FormOrder';
 
 function Accounts() {
@@ -13,4 +13,11 @@ function Accounts() {
     </div>
   )
 }
-export { Accounts }
+function mapStateToProps({ id, jwt, role }) {
+  return {
+    id,
+    jwt,
+    role,
+  }
+}
+export default connect(mapStateToProps)(Accounts);

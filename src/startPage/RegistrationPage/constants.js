@@ -7,7 +7,6 @@ const INITIAL_VALUES = {
   passportSeries: '',
   passportID: '',
   dateBirth: '',
-  gender: 'male',
   login: '',
   password: '',
 }
@@ -64,7 +63,7 @@ const LABEL_PLACEHOLDERS = {
   firstName: ['Имя', 'Иван'],
   lastName: ['Фамилия', 'Иванов'],
   patronymic: ['Отчество', 'Иванович'],
-  passportSeries: ['Серия', '555'],
+  passportSeries: ['Серия', '55555'],
   passportID: ['Номер', '555555'],
   dateBirth: ['Дата рождения', '01.01.1978'],
   login: ['Логин', 'user123'],

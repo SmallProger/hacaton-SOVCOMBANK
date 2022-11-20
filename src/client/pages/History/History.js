@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './History.css';
+import { connect } from 'react-redux';
 
 const MOC_DATA = [
   { currency: 'P', balance: 120, amount: 123, createdTime: '12.12.12', type: 'Изъятие' },
@@ -63,5 +64,11 @@ function History() {
     </div>
   )
 }
-
-export { History };
+function mapStateToProps({ id, jwt, role }) {
+  return {
+    id,
+    jwt,
+    role,
+  }
+}
+export default connect(mapStateToProps)(History);

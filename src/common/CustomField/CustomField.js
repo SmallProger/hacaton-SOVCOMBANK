@@ -9,7 +9,6 @@ function CustomField(props) {
   let [label, placeholder] = LABEL_PLACEHOLDERS[value];
 
   let mask = MASKS[value];
-  console.log(value);
   if (mask) {
     return (
       <div className='form__elem'>

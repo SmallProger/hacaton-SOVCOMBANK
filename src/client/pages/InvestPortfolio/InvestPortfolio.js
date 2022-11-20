@@ -4,6 +4,7 @@ import Chart from 'chart.js/auto';
 import ListBankAccs from '../../ListBankAccs/ListBankAccs';
 import './InvestPortfolio.css';
 import { FormCreateAcc } from '../../FormCreateAcc/FormCreateAcc';
+import { connect } from 'react-redux';
 
 const MOC_OPTIONS = {
   responsive: true,
@@ -59,7 +60,8 @@ const data = {
   ],
 };
 
-function InvestPortfolio() {
+function InvestPortfolio({ id, jwt, role }) {
+  console.log(id, jwt, role)
   return (
     <div className='invest-portfolio'>
       <div className='invest-portfolio__wrapper'>
@@ -70,4 +72,11 @@ function InvestPortfolio() {
   )
 }
 
-export { InvestPortfolio };
+function mapStateToProps({ id, jwt, role }) {
+  return {
+    id,
+    jwt,
+    role,
+  }
+}
+export default connect(mapStateToProps)(InvestPortfolio);

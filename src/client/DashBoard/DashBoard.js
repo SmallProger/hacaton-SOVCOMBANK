@@ -1,12 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router';
-import { Navigation } from '../Navigation/Navigation';
-import { Accounts } from '../pages/Accounts/Accounts';
-import { History } from '../pages/History/History';
-import { InvestPortfolio } from '../pages/InvestPortfolio/InvestPortfolio';
+import { Navigation } from '../../common/Navigation/Navigation';
+import Accounts from '../pages/Accounts/Accounts';
+import History from '../pages/History/History';
+import InvestPortfolio from '../pages/InvestPortfolio/InvestPortfolio';
+
+
 import './DashBoard.css';
 
-function DashBoard({ id }) {
+function DashBoard() {
+
   return (
     <div className='dashboard'>
       <Navigation navigationList={
@@ -24,9 +27,5 @@ function DashBoard({ id }) {
     </div>
   )
 }
-function mapStateToProps({ id }) {
-  return {
-    id: id,
-  }
-}
-export { DashBoard };
+
+export default DashBoard;

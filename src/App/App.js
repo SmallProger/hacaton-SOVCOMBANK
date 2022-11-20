@@ -5,7 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import AuthPage from '../startPage/AuthPage/AuthPage';
 import { Provider } from 'react-redux';
 import { store } from '../store';
-import { DashBoard } from '../client/DashBoard/DashBoard';
+import DashBoard from '../client/DashBoard/DashBoard';
+import DashBoardAdmin from '../admin/DashBoard/DashBoard';
 const IP_ADDRESS = React.createContext('http://79.133.181.84:8080/');
 
 function App() {
@@ -14,13 +15,14 @@ function App() {
       <IP_ADDRESS.Provider value='http://79.133.181.84:8080/'>
         <Provider store={store}>
           <Routes>
-            <Route path='/client/*' element={<DashBoard />} />
-            <Route path='/auth' element={<AuthPage />} />
             <Route path='/' element={<RegistrationPage />} />
+            <Route path='/auth' element={<AuthPage />} />
+            <Route path='/admin/*' element={<DashBoardAdmin />} />
+            <Route path='/client/*' element={<DashBoard />} />
           </Routes>
         </Provider>
       </IP_ADDRESS.Provider>
-    </div >
+    </div>
   );
 }
 export { IP_ADDRESS };

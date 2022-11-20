@@ -16,11 +16,16 @@
   top: 5%;
   cursor: pointer;
 }
+
 .invest-portfolio__wrapper {
   max-width: 900px;
   width: 100%;
   flex-grow: 1;
 }
-.invest-portfolio {
-  display: flex;
+
+@media screen and (max-width: 1650px) {
+  .invest-portfolio__wrapper {
+    max-width: 568px;
+    max-height: 568px;
+  }
 }

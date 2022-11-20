@@ -4,7 +4,7 @@ import './RegistrationPage.css';
 import { CustomField } from '../../common/common';
 import { SIGNUP_SCHEMA, LABEL_PLACEHOLDERS, INITIAL_VALUES, MASKS } from './constants'
 import { useNavigate } from 'react-router-dom';
-import { setAccountId, setIsAdminAuth } from '../../actions/actions';
+import { setUserData } from '../../actions/actions';
 import { registrate } from '../../services/registrate';
 import { IP_ADDRESS } from '../../App/App';
 import { connect } from 'react-redux';
@@ -16,8 +16,8 @@ import { bindActionCreators } from 'redux';
 function RadioButton({ handleChange }) {
   return (
     <fieldset>
-      <legend>Ваш пол:</legend>
       <div>
+        <legend>Ваш пол:</legend>
         <input onChange={handleChange} type="radio" id="male" name="gender" value='male' checked />
         <label htmlFor="male">Мужской</label>
       </div>
@@ -34,31 +34,37 @@ function RegistrationPage() {
   const IP = useContext(IP_ADDRESS)
 
   const handleSwitchForm = (event) => {
-    let choosedBtnTxt = event.target.textContent;
-    if (choosedBtnTxt === 'Для администраторов') {
-      setIsAdminAuth(true);
-    } else if (choosedBtnTxt === 'Войти') {
-      setIsAdminAuth(false);
-    }
     navigate('auth');
   }
 
   const handleSubmit = async (values) => {
-    console.log(IP, values, "REGISTRATION");
-    let { login, password, patronymic: middleName, firstName, lastName, gender } = values;
+    let { login: username, password, patronymic: middleName, firstName,
+      lastName, passportID: passportNumber, passportSeries: serialNumber, dateBirth: dateOfBirth } = values;
     let data = {
-      login,
+      username,
       password,
-      middleName,
-      firstName,
-      lastName,
-      gender
+      passport: {
+        middleName,
+        firstName,
+        lastName,
+        passportNumber,
+        serialNumber,
+        dateOfBirth: "2022-11-20T06:17:19.371Z",
+        createdTime: "2022-11-20T06:17:19.371Z",
+        changedTime: "2022-11-20T06:17:19.371Z",
+      }
     }
-    let { ok, id } = await registrate(IP, data)
-    if (ok) {
-      //Недостающая логика
-      setAccountId(id);
-      alert('успешно');
+    let answer = await registrate(IP, data)
+    if (answer.ok) {
+      setUserData({
+        id: answer.id,
+        jwt: answer.jwt,
+        role: answer.role,
+      })
+      if (answer.role === 'admin') navigate('/admin')
+      else navigate('/client')
+    } else {
+      alert('Введены неверные данные')
     }
   }
 
@@ -72,11 +78,6 @@ function RegistrationPage() {
         {({ errors, touched, handleChange, handleBlur }) => (
           <Form className='form'>
             {Object.keys(INITIAL_VALUES).map((value, index) => {
-              if (value === 'gender') {
-                return (
-                  <RadioButton handleChange={handleChange} />
-                )
-              }
               return (
                 <CustomField
                   key={`form__input${index}1`}
@@ -88,18 +89,17 @@ function RegistrationPage() {
                 />
               );
             })}
-            <button className='form__btn' type="submit">Зарегистрироваться</button>
+            <button className='form__btn form__btn_reg' type="submit">Зарегистрироваться</button>
           </Form>
         )}
       </Formik>
-      <button onClick={(event) => handleSwitchForm(event)} className='form__btn' type='button'>Войти</button>
-      <span onClick={(event) => handleSwitchForm(event)} className='form__link-admin'>Для администраторов</span>
+      <button onClick={(event) => handleSwitchForm(event)} className='form__btn form__btn_come' type='button'>Войти</button>
     </div>
   )
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setIsAdminAuth, setAccountId }, dispatch)
+  return bindActionCreators({ setUserData }, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(RegistrationPage);

@@ -7,10 +7,11 @@ async function registrate(ip, data) {
       },
       body: JSON.stringify(data)
     });
-    console.log('REGISTRATE', request.ok, request.id);
+
     return {
       ok: request.ok,
-      id: request.id,
+      jwt: request.jwt,
+      role: request.role,
     }
   } catch (err) {
     console.log(err);
